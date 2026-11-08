@@ -102,8 +102,24 @@ Whether you are a seasoned AI expert or a newcomer to the field, this book is yo
 
 </details>
 
+## GlobeBotter search provider
+
+Unset or empty base URL overrides keep the provider default. Custom path
+prefixes and trailing slashes are supported.
+
+Choose `SEARCH_PROVIDER=litescrape` and set `LITESCRAPE_API_KEY` to use the
+native Google search API in `globebotter.py`. `LITESCRAPE_BASE_URL` optionally
+overrides `https://api.litescrape.com`; requests use `GET /api/google/search`
+with bearer authentication. This mode returns titles, source URLs and snippets,
+not a full-page crawl, and does not need `SERPAPI_API_KEY`.
+
+Leaving `SEARCH_PROVIDER` unset retains the existing SerpAPI provider. The
+example still needs its existing OpenAI, Streamlit, LangChain and PDF/vector
+store setup; other book examples and notebooks are unchanged.
+
 <details open> 
   <summary><h2>Errata</summary>
+
 * Page 8, Chapter 1 : **P(“table”), P(“chain”), and P(“roof”) are the prior probabilities for each candidate word, based on the language model’s knowledge of the frequency of these words in the training data.**
 _Correction:_ **P(“table”), P(“chair”), and P(“roof”) are the prior probabilities for each candidate word, based on the language model’s knowledge of the frequency of these words in the training data.**
 

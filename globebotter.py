@@ -30,9 +30,15 @@ load_dotenv()
 
 #os.environ["HUGGINGFACEHUB_API_TOKEN"]
 openai_api_key = os.environ['OPENAI_API_KEY']
-serpapi_api_key = os.environ['SERPAPI_API_KEY']
-
-search = SerpAPIWrapper()
+search_provider = os.getenv("SEARCH_PROVIDER", "serpapi")
+if search_provider == "litescrape":
+    from litescrape_search import LitescrapeSearch
+    search = LitescrapeSearch()
+elif search_provider == "serpapi":
+    serpapi_api_key = os.environ['SERPAPI_API_KEY']
+    search = SerpAPIWrapper()
+else:
+    raise ValueError("Unsupported SEARCH_PROVIDER")
 text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1500,
             chunk_overlap=200
